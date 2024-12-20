@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Edit Book</h1>
+
+    <form method="POST">
+        <div class="mb-4">
+            <label for="title" class="form-label mb-2">Title</label>
+            <input id="title" name="title" type="text" class="form-control" value="{{book.title}}">
+        </div>
+        <div class="mb-4">
+            <label for="genre" class="form-label mb-2">Genre</label>
+            <input type="text" class="form-control" name="genre" id="genre" value="{{book.genre}}">
+        </div>
+        <div class="mb-3">
+            <label for="author_id" class="form-label mb-2">Author</label>
+            <select name="author_id" id="author_id" class="form-select">
+                {% for author in authors %}
+                <option value="{{author.id}}" {% if author.id == book.author_id %} selected {% endif %}>
+                    {{ author.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button class="btn btn-primary me-2">Update Book</button>
+        <a href="/books" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

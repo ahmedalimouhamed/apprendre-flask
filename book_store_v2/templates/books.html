@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1 class="mb-4">Books</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Add Book</h2>
+        <form action="/books/add" method="POST">
+            <div class="mb-4">
+                <label for="title" class="mb-2 form-label"></label>
+                <input id="title" name="title" type="text" class="form-control" required>
+            </div>
+            <div class="mb-4">
+                <label for="genre" class="form-label mb-2">Genre</label>
+                <input type="text" id="genre" name="genre" class="form-control" required>
+            </div>
+            <div class="mb-4">
+                <label for="author_id" class="form-label mb-2">Author</label>
+                <select name="author_id" id="author_id" class="form-control">
+                    {% for author in authors %}
+                        <option value="{{author.id}}">{{author.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Book</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <h2>Book list</h2>
+        <table class="table table-striped table-hover w-100">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Author</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{book.title}}</td>
+                        <td>{{book.genre}}</td>
+                        <td>{{book.author.name}}</td>
+                        <td>
+                            <a href="/books/edit/{{book.id}}" class="btn btn-sm btn-warning me-2">Edit</a>
+                            <form action="/books/delete/{{book.id}}" class="d-inline">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1 class="mb-4">Authors</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Add Author</h2>
+            <form method='post' action="/authors/add">
+                <div class="mb-4">
+                    <label for="name" class="form-label mb-2">Nom</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-4">
+                    <label for="bio" class="form-label mb-2">Bio</label>
+                    <textarea class="form-control" name="bio" id="bio" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Author</button>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <h2>Author List</h2>
+            <table class="table w-100 table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Bio</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for author in authors %}
+                    <tr>
+                        <td>{{author.name}}</td>
+                        <td>{{author.bio}}</td>
+                        <td>
+                            <a href="/authors/edit/{{author.id}}" class="btn btn-warning me-2 rounded btn-sm">Edit</a>
+                            <form action="/authors/delete/{{author.id}}" method="POST" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-danger rounded">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

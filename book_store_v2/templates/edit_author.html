@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Edit Author</h1>
+
+    <form method="POST">
+        <div class="mb-4">
+            <label for="name" class="form-label mb-2">Name</label>
+            <input type="text" name="name" id="name" class="form-control" value="{{ author.name }}">
+        </div>
+        <div class="mb-4">
+            <label for="bio" class="form-label mb-2">Bio</label>
+            <textarea name="bio" id="bio" cols="30" rows="10" class="form-control" rows="3">{{author.bio}}</textarea>
+        </div>
+        <button class="btn btn-primary me-2">update author</button>
+        <a href="/authors" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

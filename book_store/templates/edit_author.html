@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h1>Edit Author</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>{{form.name.label}} {{form.name()}}</p>
+        <p>{{form.bio.label}} {{form.bio()}}</p>
+        <p>{{form.submit}}</p>
+        <a href="{{url_for('manage_authors')}}">Cancel</a>
+    </form>
+
+{% endblock %}
